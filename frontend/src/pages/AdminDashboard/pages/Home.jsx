@@ -50,7 +50,7 @@ const Home = () => {
 
     return (
         < >
-        <h1>Welcome to Dashboard</h1>
+        <h1 className='d-none d-md-block'>Welcome to Dashboard</h1>
 
        
         <div className="row">

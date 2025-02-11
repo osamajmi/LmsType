@@ -83,6 +83,7 @@ export const Admin = () => {
 
 
     <div className="topbar justify-content-end">
+        <h2>Welcome To Admin Dashboard</h2>
         <div className="profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile" data-bs-toggle="dropdown" />
           

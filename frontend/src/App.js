@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
         {/* <Navbar /> */}
-        <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={2500} />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>}/>

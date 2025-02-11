@@ -85,9 +85,10 @@ function validateUserID(e){
                         'Content-Type': 'multipart/form-data'
                     }
                 })
-                toast.success("Registration Successful!");
+              
                if(res.status === 200){
-                    alert('Registration Successfull')
+                    toast.success("Registration Successful!");
+                    // alert('Registration Successfull')
                     window.location.href = '/login'
 
                }

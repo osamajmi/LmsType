@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {useFormik} from 'formik';
 import  * as yup from 'yup';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -38,6 +39,9 @@ const Login = () => {
             })
             .catch(error => {
                 console.log(error);
+
+                  toast.error(error.response.data.error);
+                  toast.error("Login Failed!")
             })
         }
 

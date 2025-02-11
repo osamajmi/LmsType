@@ -15,10 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 
-app.use(cors({
-    origin: "*", 
-    methods: ["GET", "POST", "PUT", "DELETE"]
-}));
+app.use(cors());
 // app.use("/videos", express.static(path.join(__dirname, "uploads/videos")));
 
 // const uploadsPath = path.join(__dirname, "..", "uploads");

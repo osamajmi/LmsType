@@ -109,7 +109,7 @@ const isValidId = (e)=>{
         
 
     function handelDelete(item){
-        axios.delete(`http://localhost:5000/deleteVid/${item}`)
+        axios.delete(`https://lmstype.onrender.com/deleteVid/${item}`)
         .then((response)=>{
             // console.log(response.data);
              toast.success("Delete Successful!");
@@ -201,7 +201,7 @@ const isValidId = (e)=>{
                             <td>{index+1}</td>
                             <td>
                             <video controls width="200" height="150">
-                                <source src={`http://127.0.0.1:5000/uploads/video/${item.videoFile}`} type="video/mp4"/>
+                                <source src={`https://lmstype.onrender.com/uploads/video/${item.videoFile}`} type="video/mp4"/>
                                
                             </video>
 

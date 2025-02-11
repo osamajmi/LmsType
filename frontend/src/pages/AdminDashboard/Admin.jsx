@@ -61,7 +61,27 @@ export const Admin = () => {
         </ul>
     </div>
 
-    
+    <div className="bottom-nav">
+    <NavLink to="#" onClick={() => setComp("home")} className={Component === "home" ? "active" : ""}>
+        <i className="bi bi-house-door"></i>
+        <span>Dashboard</span>
+    </NavLink>
+    <NavLink to="#" onClick={() => setComp("Videos")} className={Component === "Videos" ? "active" : ""}>
+        <i className="bi bi-camera-video"></i>
+        <span>Videos</span>
+    </NavLink>
+    <NavLink to="#" onClick={() => setComp("Categories")} className={Component === "Categories" ? "active" : ""}>
+        <i className="bi bi-folder-plus"></i>
+        <span>Categories</span>
+    </NavLink>
+    <NavLink to="#" onClick={handleLogout} className={Component === "Logout" ? "active" : ""}>
+        <i className="bi bi-box-arrow-right"></i>
+        <span>Logout</span>
+    </NavLink>
+</div>
+
+
+
     <div className="topbar justify-content-end">
         <div className="profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile" data-bs-toggle="dropdown" />

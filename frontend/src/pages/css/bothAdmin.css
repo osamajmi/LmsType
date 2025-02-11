@@ -1,0 +1,166 @@
+
+        /* Basic Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: #343a40;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-item {
+            margin: 8px 0;
+        }
+
+        .sidebar .nav-item a {
+            color: #ddd;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .sidebar .nav-item a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .sidebar .nav-item a i {
+            margin-right: 10px;
+        }
+        .nav{
+            padding-left: 12px;
+        }
+        .topbar {
+            background-color: #007bff;
+            padding: 10px 20px;
+            color: #fff;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+
+        .topbar .profile {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .topbar .profile img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .topbar .profile .dropdown-toggle {
+            font-size: 16px;
+            color: #fff;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .topbar .dropdown-menu {
+            min-width: 160px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            padding: 10px;
+        }
+
+        .topbar .dropdown-menu a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .topbar .dropdown-menu a:hover {
+            background-color: #f4f6f9;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .card-body {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .stat-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card .stat-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .stat-card .stat-digit {
+            font-size: 24px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        table td img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+  

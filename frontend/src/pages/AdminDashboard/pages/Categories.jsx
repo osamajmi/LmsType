@@ -14,7 +14,7 @@ const Categories = () => {
    const [danger,setdanger] = React.useState('');
 
  const CatData = ()=>{
-         axios.get("http://localhost:5000/categories")
+         axios.get("https://lmstype.onrender.com/categories")
         .then((response)=>{
             setCetogories(response.data)
             set_id(response.data)
@@ -61,7 +61,7 @@ const Categories = () => {
         }),
         onSubmit : async (values)=>{
             console.log(values)
-           const res = await axios.post('http://localhost:5000/addCat',values);
+           const res = await axios.post('https://lmstype.onrender.com/addCat',values);
         
             toast.success("✔ Add Successful!");
             CatData();
@@ -70,7 +70,7 @@ const Categories = () => {
     const handelDelete =  (cat_id)=>{
 
        console.log(cat_id)
-       axios.delete(`http://localhost:5000/deleteCat/${cat_id}`)
+       axios.delete(`https://lmstype.onrender.com/deleteCat/${cat_id}`)
        .then(res =>{console.log(res.data)
          toast.success("Delete Successful!");
          CatData();

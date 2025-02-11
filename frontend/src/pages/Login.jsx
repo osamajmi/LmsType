@@ -22,7 +22,7 @@ const Login = () => {
         }),
         onSubmit : (values) => {
             // console.log(values);
-            axios.post("http://127.0.0.1:5000/Login",values)
+            axios.post("https://lmstype.onrender.com/Login",values)
             .then(response => {
                 // console.log(response.data);
                 localStorage.setItem("token", response.data.token);

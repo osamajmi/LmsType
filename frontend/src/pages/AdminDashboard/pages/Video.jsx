@@ -15,7 +15,7 @@ const Video = () => {
 
 
 const CatData = ()=>{
-    axios.get("http://localhost:5000/categories")
+    axios.get("https://lmstype.onrender.com/categories")
    .then((response)=>{
       
     

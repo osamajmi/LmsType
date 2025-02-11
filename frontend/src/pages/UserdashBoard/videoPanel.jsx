@@ -10,12 +10,12 @@ const VideoPanel = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("https://lmstype.onrender.com/categories")
       .then((response) => setCategories(response.data))
       .catch((error) => console.error("Error fetching categories:", error));
 
     axios
-      .get("http://localhost:5000/allVideo")
+      .get("https://lmstype.onrender.com/allVideo")
       .then((response) => setVideos(response.data))
       .catch((error) => console.error("Error fetching videos:", error));
   }, []);
@@ -27,7 +27,7 @@ const VideoPanel = () => {
     }
 
     axios
-      .get(`http://localhost:5000/getVid/${id}`)
+      .get(`https://lmstype.onrender.com/getVid/${id}`)
       .then((response) => setSelectedVideo(response.data))
       .catch((error) => console.error("Error fetching selected video:", error));
   };
@@ -74,7 +74,7 @@ const VideoPanel = () => {
                 <h5 className="text-center">{selectedVideo.title}</h5>
                 <video
                   controls
-                  src={`http://127.0.0.1:5000/uploads/video/${selectedVideo.videoFile}`}
+                  src={`https://lmstype.onrender.com/uploads/video/${selectedVideo.videoFile}`}
                   style={{
                     width: "100%",
                     height: "250px",
@@ -95,7 +95,7 @@ const VideoPanel = () => {
                 <div className="video-container border p-2 rounded shadow">
                   <video
                     controls
-                    src={`http://127.0.0.1:5000/uploads/video/${video.videoFile}`}
+                    src={`https://lmstype.onrender.com/uploads/video/${video.videoFile}`}
                     style={{
                       width: "100%",
                       height: "150px",

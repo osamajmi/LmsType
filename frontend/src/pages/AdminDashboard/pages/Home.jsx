@@ -10,7 +10,7 @@ const Home = () => {
 
     const studentsData = ()=>{
 
-        axios.get("http://127.0.0.1:5000/Users")
+        axios.get("https://lmstype.onrender.com/Users")
         .then(res=>{
           setStudentData(res.data)
           setCount(res.data.length)
@@ -22,7 +22,7 @@ const Home = () => {
 
     const deleteStudent = (id) => {
 
-       axios.delete(`http://localhost:5000/User/${id}`)
+       axios.delete(`https://lmstype.onrender.com/User/${id}`)
        .then((response) => {
         toast.success(" ✔ Student deleted successfully");
         console.log(response.data);
@@ -103,7 +103,7 @@ const Home = () => {
                                 <tr key={data.id}>
                                   <td>{index+1}</td> 
                                   <td>{data.name}</td>
-                                  <td><img src={`http://127.0.0.1:5000/uploads/${data.profileImage}`} alt="User"/></td>
+                                  <td><img src={`https://lmstype.onrender.com/uploads/${data.profileImage}`} alt="User"/></td>
                                   <td>{data.userId}</td>
                                   <td>
                                     <button className="btn btn-danger btn-sm" onClick={() => deleteStudent(data.userId)}>Delete</button>

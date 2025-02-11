@@ -14,7 +14,7 @@ const Register = () => {
 
         const users =  useCallback( async ()=>{
             try {
-                const response = await axios.get('http://localhost:5000/Users')
+                const response = await axios.get('https://lmstype.onrender.com/Users')
                 return setUserID(response.data);
             }
             catch(err){
@@ -80,7 +80,7 @@ function validateUserID(e){
             formData.append("phone", values.phone);
             
             try{
-                const res = await axios.post('http://localhost:5000/registerStd', formData,{
+                const res = await axios.post('https://lmstype.onrender.com/registerStd', formData,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }

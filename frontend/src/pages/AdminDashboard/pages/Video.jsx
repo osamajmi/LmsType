@@ -32,7 +32,7 @@ const CatData = ()=>{
 
 const videoData = ()=>{
 
-    axios.get('http://localhost:5000/allVideo')
+    axios.get('https://lmstype.onrender.com/allVideo')
     .then((response)=>{
         setVideos(response.data);
         set_id(response.data)
@@ -95,7 +95,7 @@ const isValidId = (e)=>{
                 formData.append("cat_id", values.cat_id);
         
                
-                axios.post("http://localhost:5000/addVideo", formData)
+                axios.post("https://lmstype.onrender.com/addVideo", formData)
                     .then((response) => {
                         // console.log(response.data);
                         toast.success("✔ Add Successful!");

@@ -11,12 +11,15 @@ const addVideo = async (req, res) => {
         const parsid = parseInt(id)
         const videoFile =  req.file ? req.file.filename : null
         const cat_no = parseInt(cat_id)
+        // if ( isNaN(cat_no)) {
+        //     return res.status(400).json({ error: "Invalid ID or Category" });
+        // }
         const videoData = {
             id:parsid,
             title,
             description,
+            videoFile:videoFile,
             cat_id:cat_no,
-            videoFile:videoFile
         }
 
 
@@ -70,7 +73,27 @@ const videoDelete = async (req,res)=>{
 
 }
 
+const getByCat_id = async (req,res)=>{
+  
+    try{
+
+  
+     const id = parseInt(req.params.id)
+     const db = client.db("StdLms")
+     const videoData = await db.collection("videos").find({cat_id:id}).toArray()
+     res.json(videoData)
+     
+    }
+    catch(err){
+
+        console.log(err);
+        res.status(500).json({error:"server error"})
+        
+
+    }
+
+}
 
 
 
-module.exports={addVideo,getvideo,videoDelete}
+module.exports={addVideo,getvideo,videoDelete,getByCat_id}

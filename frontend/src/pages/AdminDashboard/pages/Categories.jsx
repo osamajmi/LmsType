@@ -1,30 +1,47 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useCallback, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import * as yup from 'yup'
 
 
 const Categories = () => {
 
    const [categoires ,setCetogories] = React.useState([]);
+   const [getdata , set_id] = React.useState([]);
 
-//    const CatData = useCallback(async ()=>{
-
-//        try{
-//              const response = await axios.get('http://localhost:5000/categories')
-//              setCetogories(response.data)
-//        }
-//        catch(err){
-//         console.log(err);
-//        }
-//    },[])
+   const [msgerr, setmsg] = React.useState('');
+   const [danger,setdanger] = React.useState('');
 
  const CatData = ()=>{
          axios.get("http://localhost:5000/categories")
         .then((response)=>{
             setCetogories(response.data)
+            set_id(response.data)
         })
 }
+
+
+   const isValidId = (e)=>{
+      var id  = parseInt(e.target.value)
+       
+      for (const value of getdata) {
+          
+          if(value.cat_id === id){
+                setmsg("id already exits")
+                setdanger("text-danger")
+                break;
+          }
+          else{
+            setmsg("")
+            setdanger("")
+          }
+
+        
+        
+      }
+
+   }
 
    useEffect(() => {
     CatData()
@@ -45,19 +62,22 @@ const Categories = () => {
         onSubmit : async (values)=>{
             console.log(values)
            const res = await axios.post('http://localhost:5000/addCat',values);
-        //    window.location.reload()
-            console.log(res)
-            CatData()
+        
+            toast.success("✔ Add Successful!");
+            CatData();
         }
     })
     const handelDelete =  (cat_id)=>{
 
        console.log(cat_id)
        axios.delete(`http://localhost:5000/deleteCat/${cat_id}`)
-       .then(res => console.log(res.data))
+       .then(res =>{console.log(res.data)
+         toast.success("Delete Successful!");
+         CatData();
+       })
        .catch(err => console.log(err))
 
-       CatData();
+      
       
 
     }
@@ -70,14 +90,15 @@ const Categories = () => {
 
                <div className="d-flex gap-4">
                <div className="mb-3">
-                   <label for="category" className='form-label'>Categories ID </label>
-                   <input type="text" className="form-control" id="category" name="cat_id" onChange={formik.handleChange}/>
+                   <label forhtml="category" className='form-label'>Categories ID </label>
+                   <input type="text" className="form-control" id="category" name="cat_id" onKeyUp={isValidId} onChange={formik.handleChange}/>
                    <span className='text-danger'>{formik.errors.cat_id}</span>
+                   <span className={danger}>{msgerr}</span>
                 </div>
 
                 <div className="mb-3">
-                   <label for="category" className='form-label'>Categories Name </label>
-                   <input type="text" className="form-control" id="name" name="name" onChange={formik.handleChange}/>
+                   <label forhtml="category" className='form-label'>Categories Name </label>
+                   <input type="text" className="form-control" id="name" name="name"  onChange={formik.handleChange}/>
                    <span className='text-danger'>{formik.errors.name}</span>
                 </div>
 
@@ -89,7 +110,7 @@ const Categories = () => {
              </form>
 
              <div className='mt-5'>
-                <table class="table table-striped table-hover" style={{"height":'200px', "overflowY":'scroll'}}>
+                <table className="table table-striped table-hover" style={{"height":'200px', "overflowY":'scroll'}}>
                 <thead>
                         <tr>
                             <th>Categories_id</th>

@@ -9,13 +9,15 @@ import Navbar from './components/navbar';
 import { Admin } from './pages/AdminDashboard/Admin';
 import UserDash from './pages/UserdashBoard/UserDash';
 import ProtectedRoute from './components/ProtectedRoute';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
   return (
     <div className="App">
         {/* <Navbar /> */}
+        <ToastContainer position="top-right" autoClose={3000} />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage/>}/>

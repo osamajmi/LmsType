@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import "../css/bothAdmin.css"
-import { Await, Link, NavLink } from 'react-router-dom';
+import {  Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Home from './pages/Home';
 import Video from './pages/Video';
@@ -21,7 +21,8 @@ export const Admin = () => {
         
     };
  const [Component , setComp] = React.useState("home");
-    
+ 
+ 
  const renderComponent = () => {
     switch (Component) {
         case 'home':
@@ -41,42 +42,42 @@ export const Admin = () => {
 
       <>
       
-    <div class="sidebar">
-        <h3 class="text-center text-white">Admin Dashboard</h3>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <NavLink href="#" onClick={()=>setComp("home")}><i class="fas fa-tachometer-alt active"></i> Dashboard</NavLink>
+    <div className="sidebar">
+        <h3 className="text-center text-white">Admin Dashboard</h3>
+        <ul className="nav flex-column">
+            <li className="nav-item">
+                <NavLink href="#" onClick={()=>setComp("home")}><i className="fas fa-tachometer-alt active"></i> Dashboard</NavLink>
             </li>
-            <li class="nav-item">
-                <NavLink href="#" onClick={()=>setComp("Videos")}><i class="fas fa-video"></i> Videos</NavLink>
+            <li className="nav-item">
+                <NavLink href="#" onClick={()=>setComp("Videos")}><i className="fas fa-video"></i> Videos</NavLink>
             </li>
-            <li class="nav-item">
-                <NavLink href="#" onClick={()=>setComp("Categories")}><i class="fas fa-plus-circle"></i> Add Categories</NavLink>
+            <li className="nav-item">
+                <NavLink href="#" onClick={()=>setComp("Categories")}><i className="fas fa-plus-circle"></i> Add Categories</NavLink>
             </li>
            
-            <li class="nav-item">
-                <NavLink href="#" onClick={handleLogout}><i class="fas fa-sign-out-alt"></i> Logout</NavLink>
+            <li className="nav-item">
+                <NavLink href="#" onClick={handleLogout}><i className="fas fa-sign-out-alt"></i> Logout</NavLink>
             </li>
         </ul>
     </div>
 
     
-    <div class="topbar">
-        <div class="profile">
+    <div className="topbar justify-content-end">
+        <div className="profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile" data-bs-toggle="dropdown" />
           
             <span>Admin</span>
-            <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-chevron-down"></i>
+            <span className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fas fa-chevron-down"></i>
             </span>
-            <div class="dropdown-menu">
+            <div className="dropdown-menu">
                 <Link>Settings</Link>
                 <Link onClick={handleLogout}>Logout</Link>
             </div>
         </div>
     </div>
 
-   <div class="main-content">
+   <div className="main-content">
      {
         renderComponent()
      }
@@ -84,7 +85,7 @@ export const Admin = () => {
     
 
   
-    <div class="footer">
+    <div className="footer">
         <p>&copy; 2025 Admin Dashboard. All Rights Reserved.   developed by md osama Khan</p>
     </div>
 

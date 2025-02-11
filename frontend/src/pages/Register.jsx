@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 const Register = () => {
@@ -51,7 +52,7 @@ function validateUserID(e){
         initialValues: {
             userId: '',
             name: '',
-            file: '',
+            file: null,
             password: '',
             email: '',
             phone: '',
@@ -73,16 +74,18 @@ function validateUserID(e){
             const formData = new FormData();
             formData.append("userId", values.userId);
             formData.append("name", values.name);
+            formData.append("profileImage",values.file);
             formData.append("password", values.password);
             formData.append("email", values.email);
             formData.append("phone", values.phone);
-            formData.append("file", values.file);
+            
             try{
                 const res = await axios.post('http://localhost:5000/registerStd', formData,{
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 })
+                toast.success("Registration Successful!");
                if(res.status === 200){
                     alert('Registration Successfull')
                     window.location.href = '/login'
@@ -91,13 +94,18 @@ function validateUserID(e){
               
             }catch(err){
                 console.log(err);
+
+                toast.error("Registration Failed!");
                 
             }
           
              
         }
     })
-
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]; 
+        formik.setFieldValue("file", file);  
+    };
     return (
         <div className="authincation ">
         <div className="container-fluid">
@@ -124,7 +132,7 @@ function validateUserID(e){
                                         </div>
                                         <div className="form-group mb-3">
                                             <label className='mb-2'><strong>Profile Pic</strong></label>
-                                            <input type="file" className="form-control" name ="file" onChange={formik.handleChange}/>
+                                            <input type="file" className="form-control" name ="file" onChange={handleFileChange}/>
                                             <span className="text-danger">{formik.errors.file}</span>
                                         </div>
                                         <div className="form-group mb-3">

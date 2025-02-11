@@ -1,78 +1,91 @@
 import axios from 'axios';
 import React, { useCallback, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const Home = () => {
 
     const [studentData , setStudentData] = React.useState([]);
     const [count , setCount] = React.useState(0);
-    const deleteStudent = async (id) => {
 
+
+    const studentsData = ()=>{
+
+        axios.get("http://127.0.0.1:5000/Users")
+        .then(res=>{
+          setStudentData(res.data)
+          setCount(res.data.length)
+        //   console.log(res.data)
+        })
+          
+  
+     }
+
+    const deleteStudent = (id) => {
+
+       axios.delete(`http://localhost:5000/User/${id}`)
+       .then((response) => {
+        toast.success(" ✔ Student deleted successfully");
+        console.log(response.data);
+        studentsData();
+       
+       })
+       .catch((error) => {
+        console.error(error);
+       })
+    // alert(id)
+      
        
         
-        try{
-            const res = await axios.delete(`https://127.0.0.1:5000/User/${id}`)
-            console.log(res.data);
-            
-           
-        }
-        catch(error){
-            console.log(error);
-        }
-
     }
+    
 
-   const studentsData = useCallback( async ()=>{
-
-        const data = await axios.get("http://127.0.0.1:5000/Users")
-        setStudentData(data.data)
-        setCount(data.data.length)
-
-   },[])
+ 
 
 
    useEffect(() => {
+
     studentsData();
    
-   }, [studentsData]);
+   }, []);
 
     return (
         < >
         <h1>Welcome to Dashboard</h1>
 
        
-        <div class="row">
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-text">Total Students</div>
-                    <div class="stat-digit">{count}</div>
+        <div className="row">
+            <div className="col-md-3">
+                <div className="stat-card">
+                    <div className="stat-text">Total Students</div>
+                    <div className="stat-digit">{count}</div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-text">Total Teachers</div>
-                    <div class="stat-digit">50</div>
+            <div className="col-md-3">
+                <div className="stat-card">
+                    <div className="stat-text">Total Teachers</div>
+                    <div className="stat-digit">50</div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-text">Active Courses</div>
-                    <div class="stat-digit">20</div>
+            <div className="col-md-3">
+                <div className="stat-card">
+                    <div className="stat-text">Active Courses</div>
+                    <div className="stat-digit">20</div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="stat-card">
-                    <div class="stat-text">New Enrollments</div>
-                    <div class="stat-digit">30</div>
+            <div className="col-md-3">
+                <div className="stat-card">
+                    <div className="stat-text">New Enrollments</div>
+                    <div className="stat-digit">30</div>
                 </div>
             </div>
         </div>
 
        
-        <div class="card">
-            <div class="card-header">
+        <div className="card">
+            <div className="card-header">
                 Recent Activity
             </div>
-            <div class="card-body">
+            <div className="card-body">
                 <table>
                     <thead>
                         <tr>
@@ -86,14 +99,17 @@ const Home = () => {
                     <tbody>
                        
                       {
-                                studentData.map(data=>
+                              studentData.map((data, index) => (
                                 <tr key={data.id}>
-                                    <td>{count-1}</td>
-                                    <td>{data.name}</td>
-                                    <td><img src={`http://127.0.0.1:5000/uploads/${data.profileImage}`} alt="User"/></td>
-                                    <td>{data.userId}</td>
-                                    <td><button class="btn btn-danger btn-sm" onClick={() => deleteStudent(data.id)}>Delete</button></td>
-                                </tr>)
+                                  <td>{index+1}</td> 
+                                  <td>{data.name}</td>
+                                  <td><img src={`http://127.0.0.1:5000/uploads/${data.profileImage}`} alt="User"/></td>
+                                  <td>{data.userId}</td>
+                                  <td>
+                                    <button className="btn btn-danger btn-sm" onClick={() => deleteStudent(data.userId)}>Delete</button>
+                                  </td>
+                                </tr>
+                              ))
                       }
                     </tbody>
                 </table>

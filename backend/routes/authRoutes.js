@@ -2,7 +2,7 @@ const express = require("express");
 const { registerStd,  UserLogin, stdData, stdId, deleteUser } = require("../controller/authController"); 
 const { createCategory, editCategory, deleteCat, getCat } = require("../controller/createCategories");
 const {uploadProfile} = require('../middleware/UploadProfile');
-const { addVideo, getvideo, videoDelete } = require("../controller/AddVideo");
+const { addVideo, getvideo, videoDelete, getByCat_id } = require("../controller/AddVideo");
 const { uploadVideo } = require("../middleware/Uploadvideo");
 
 const router = express.Router();
@@ -43,6 +43,10 @@ router.post("/addVideo",uploadVideo.single("videoFile"),addVideo)
 // get all video
 
 router.get("/allVideo", getvideo)
+
+// get vai categori
+
+router.get("/getVid/:id",getByCat_id)
 
 // delete Video 
 

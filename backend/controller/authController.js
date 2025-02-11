@@ -60,7 +60,7 @@ const UserLogin = async (req,res)=>{
 
             if(isValid){
                 const token = jwt.sign({ userId: foundUser.userId ,role : foundUser.role }, 'Lms@@1234jmi', { expiresIn: '1h'})
-                res.status(200).json({token : token, userId:userId ,name : foundUser.name , role: foundUser.role})
+                res.status(200).json({token : token, userId:userId ,name : foundUser.name , role: foundUser.role ,image :foundUser.profileImage})
             }
             else{
                 res.status(401).json({error : "Invalid Password "})
@@ -121,9 +121,9 @@ const stdId = async (req,res)=>{
 
 const deleteUser = async (req,res)=>{
     try{
-        const id = parseInt(req.params.Id)
+        const id = req.params.Id;
         const db = client.db('StdLms');
-        const result = await db.collection("Student").deleteOne({Id: id});
+        const result = await db.collection("Student").deleteOne({ userId: id});
         if(result){
             res.status(200).json({message : "User Deleted Successfully "})
         }

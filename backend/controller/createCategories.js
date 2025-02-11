@@ -74,7 +74,7 @@ const getCat = async (req,res)=>{
     try{
 
         const db = client.db("StdLms")
-        const categories = await db.collection("Categories").find().toArray();
+        const categories = await db.collection("Categories").find({}).toArray();
         res.status(200).json(categories)
 
     }

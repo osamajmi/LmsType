@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import  * as yup from 'yup';
 
 const Video = () => {
@@ -8,14 +9,18 @@ const Video = () => {
  const [categoires ,setCetogories] = React.useState([]);
  const [videos ,setVideos] = React.useState([]);
 
+ const [getdata , set_id] = React.useState([]);
+ const [msgerr, setmsg] = React.useState('');
+ const [danger,setdanger] = React.useState('');
+
 
 const CatData = ()=>{
     axios.get("http://localhost:5000/categories")
    .then((response)=>{
       
-      response.data.unshift("Select categori")
-      setCetogories(response.data)
-       
+    
+      setCetogories([{cat_id:-1 ,name : "Select categori"},...response.data]);
+
     // console.log(response.data)
    })
    .catch((error)=>{
@@ -29,10 +34,33 @@ const videoData = ()=>{
 
     axios.get('http://localhost:5000/allVideo')
     .then((response)=>{
-        setVideos(response.data)
+        setVideos(response.data);
+        set_id(response.data)
+
     })
       
 }
+
+const isValidId = (e)=>{
+    var id  = parseInt(e.target.value)
+     
+    for (const value of getdata) {
+        
+        if(value.cat_id === id){
+              setmsg("id already exits")
+              setdanger("text-danger")
+              break;
+        }
+        else{
+          setmsg("")
+          setdanger("")
+        }
+
+      
+      
+    }
+
+ }
 
         useEffect(() => {
 
@@ -41,45 +69,67 @@ const videoData = ()=>{
 
         }, []);
 
-
         const formik = useFormik({
             initialValues: {
                 id: "",
                 title: "",
                 description: "",
-                file:"",
-                category:""
-                },
-            validationSchema : yup.object({
-
+                file: null, 
+                cat_id: null, 
+            },
+            validationSchema: yup.object({
                 id: yup.number().required("Please enter id"),
                 title: yup.string().required("Please enter title"),
                 description: yup.string().required("Please enter description"),
-                file: yup.string().required("Please enter file"),
-                category: yup.string().required("Please enter category"),
-
+                file: yup.mixed().required("Please enter file"), 
+                cat_id: yup.number().required("Please enter category").nullable(), 
             }),
-            onSubmit:(values)=>{
-                
+            onSubmit: (values) => {
+                // console.log(values); 
+              
                 const formData = new FormData();
                 formData.append("id", values.id);
                 formData.append("title", values.title);
                 formData.append("description", values.description);
-                formData.append("file", values.file);
-                formData.append("category", values.category);
-                
-
-                console.log(values);
-                axios.post("http://localhost:5000/addVideo",formData)
-                .then((response)=>{
-                    console.log(response.data);
-
-                })
-                videoData()
-            }
+                formData.append("videoFile", values.file);
+                formData.append("cat_id", values.cat_id);
         
-        })
+               
+                axios.post("http://localhost:5000/addVideo", formData)
+                    .then((response) => {
+                        // console.log(response.data);
+                        toast.success("✔ Add Successful!");
+                        videoData();
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            },
+        });
+        
 
+    function handelDelete(item){
+        axios.delete(`http://localhost:5000/deleteVid/${item}`)
+        .then((response)=>{
+            // console.log(response.data);
+             toast.success("Delete Successful!");
+            videoData();
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]; 
+        formik.setFieldValue("file", file);  
+    };
+
+
+    const handleCatchange = (event) => {
+        const value = event.target.value ? parseInt(event.target.value) : null;
+        formik.setFieldValue("cat_id",value)
+
+    }
     return (
         <div>
            
@@ -91,11 +141,12 @@ const videoData = ()=>{
                 
                     <div className="col-md-6">
                         <label htmlFor="id" className="form-label fw-bold">ID:</label>
-                        <input type="number" id="id" name="id" className="form-control" placeholder="Enter ID"  onChange={formik.handleChange}/>
+                        <input type="number" id="id" name="id" className="form-control" placeholder="Enter ID" onKeyUp={isValidId} onChange={formik.handleChange}/>
                         <span className='text-danger'>{formik.errors.id}</span>
+                        <span className={danger}>{msgerr}</span>
                     </div>
                     <div className="col-md-6">
-                        <label htmlFor="title" className="form-label fw-bold">Title:</label>
+                        <label htmlFor="title" className="form-label fw-bold">Course</label>
                         <input type="text" id="title" name="title" className="form-control" placeholder="Enter Title"  onChange={formik.handleChange}/>
                         <span className='text-danger'>{formik.errors.title}</span>
                     </div>
@@ -103,13 +154,13 @@ const videoData = ()=>{
                 <div className="row g-3 align-items-center">
                 
                 <div className="col-md-6 mt-4">
-                    <label htmlFor="description" className="form-label fw-bold">description:</label>
+                    <label htmlFor="description" className="form-label fw-bold">Teacher</label>
                     <input type="text" id="description" name="description" className="form-control" placeholder="Enter description"  onChange={formik.handleChange}/>
                     <span className='text-danger'>{formik.errors.description}</span>
                 </div>
                 <div className="col-md-6">
                     <label htmlFor="file" className="form-label fw-bold">file:</label>
-                    <input type="file" id="file" name="file" className="form-control" placeholder="Enter file" onChange={formik.handleChange} />
+                    <input type="file" id="file" name="file" className="form-control" placeholder="Enter file" onChange={handleFileChange} />
                     <span className='text-danger'>{formik.errors.file}</span>
                 </div>
             </div>
@@ -117,9 +168,9 @@ const videoData = ()=>{
                 
                 <div className="col-md-6">
                     <label htmlFor="id" className="form-label fw-bold"> Select you Category:</label>
-                    <select name="category" id="" className='form-select' onChange={formik.handleChange}>
+                    <select name="cat_id" id="" className='form-select' onChange={handleCatchange}>
                         {
-                                categoires.map(item=><option value={item.cat_id}>{item.name}</option>)
+                                categoires.map(item=><option key={item.cat_id} value={item.cat_id}>{item.name}</option>)
                         }
                     </select>
                     <span className='text-danger'>{formik.errors.category}</span>
@@ -138,16 +189,16 @@ const videoData = ()=>{
                     <tr>
                         <th>SR No</th>
                         <th>Video</th>
-                        <th>title</th>
-                        <th>Description</th>
+                        <th>Course</th>
+                        <th>Teacher</th>
                         <th>Category</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody className="text-center">
                     {
-                        videos.map(item=><tr key={item.id}>
-                            <td>{item.id}</td>
+                        videos.map((item,index)=><tr key={item.id}>
+                            <td>{index+1}</td>
                             <td>
                             <video controls width="200" height="150">
                                 <source src={`http://127.0.0.1:5000/uploads/video/${item.videoFile}`} type="video/mp4"/>
@@ -157,8 +208,8 @@ const videoData = ()=>{
                             </td>
                             <td>{item.title}</td>
                             <td>{item.description}</td>
-                            <td>{item.name}</td>
-                            <td>  <button className="btn btn-danger btn-sm">
+                            <td>{item.cat_id}</td>
+                            <td>  <button className="btn btn-danger btn-sm" onClick={()=>handelDelete(item.id)}>
                                 <i className="bi bi-trash"></i> Delete
                             </button></td>
                         </tr>)

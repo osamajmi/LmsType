@@ -122,7 +122,7 @@ const Categories = () => {
                     {
                             categoires.map((item,index)=>
                                 <tr key={item.cat_id}>
-                                    <td>{index}</td>
+                                    <td>{index+1}</td>
                                     <td>{item.name}</td>
                                     <td><span className='bi bi-trash btn-danger' onClick={()=>handelDelete(item.cat_id)}></span></td>
                                 </tr>

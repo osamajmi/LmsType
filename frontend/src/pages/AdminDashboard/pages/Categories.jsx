@@ -120,9 +120,9 @@ const Categories = () => {
                 </thead> 
                 <tbody>
                     {
-                            categoires.map(item=>
+                            categoires.map((item,index)=>
                                 <tr key={item.cat_id}>
-                                    <td>{item.cat_id}</td>
+                                    <td>{index}</td>
                                     <td>{item.name}</td>
                                     <td><span className='bi bi-trash btn-danger' onClick={()=>handelDelete(item.cat_id)}></span></td>
                                 </tr>

@@ -83,7 +83,7 @@ export const Admin = () => {
 
 
     <div className="topbar justify-content-between ">
-        <h2 className=' headM'>Welcome To Admin Dashboard</h2>
+        <h2 className='headM'>Welcome To Admin Dashboard</h2>
         <div className="profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile" data-bs-toggle="dropdown" />
           

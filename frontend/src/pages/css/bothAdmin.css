@@ -332,11 +332,14 @@ table td img {
         transform: scale(1.05);
     }
 }
+.headM{
+    margin-left: 100px !important;
+}
 @media(min-width:768px){
     .bottom-nav {
         display: none;
     }
-}
-.headM{
-    margin-left: 100px !important;
+    .headM{
+        margin-left: 10px !important;
+    }
 }

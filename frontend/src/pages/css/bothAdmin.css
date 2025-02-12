@@ -331,6 +331,9 @@ table td img {
         color: #fff;
         transform: scale(1.05);
     }
+    h1.text-center.userStd {
+        font-size: 16px;
+    }
 }
 .headM{
     margin-left: 100px !important;

@@ -52,7 +52,7 @@ const UserDash = () => {
 
     
     <div className="topbar">
-    <h1 className='text-center'>Welcome to Dashboard {user}</h1>
+    <h1 className='text-center userStd'>Welcome to Dashboard {user}</h1>
         <div className="profile">
             <img src={`https://lmstype.onrender.com/uploads/${photo}`} alt="Profile" data-bs-toggle="dropdown" />
           

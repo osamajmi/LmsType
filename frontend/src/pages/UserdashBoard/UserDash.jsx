@@ -67,7 +67,7 @@ const UserDash = () => {
         </div>
     </div>
     <div className="bottom-nav">
-    <NavLink to="#">
+    <NavLink to="/">
         <i className="bi bi-house-door"></i>
         <span>Dashboard</span>
     </NavLink>
@@ -79,7 +79,7 @@ const UserDash = () => {
         <i className="bi bi-folder-plus"></i>
         <span>Categories</span>
     </NavLink> */}
-    <NavLink to="#" >
+    <NavLink to="#" onClick={handleLogout}>
         <i className="bi bi-box-arrow-right"></i>
         <span>Logout</span>
     </NavLink>

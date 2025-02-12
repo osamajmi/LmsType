@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import "../css/bothAdmin.css"
 import VideoPanel from './videoPanel';
 
@@ -66,7 +66,24 @@ const UserDash = () => {
             </div>
         </div>
     </div>
-
+    <div className="bottom-nav">
+    <NavLink to="#">
+        <i className="bi bi-house-door"></i>
+        <span>Dashboard</span>
+    </NavLink>
+    {/* <NavLink to="#" onClick={() => setComp("Videos")} className={Component === "Videos" ? "active" : ""}>
+        <i className="bi bi-camera-video"></i>
+        <span>Videos</span>
+    </NavLink>
+    <NavLink to="#" onClick={() => setComp("Categories")} className={Component === "Categories" ? "active" : ""}>
+        <i className="bi bi-folder-plus"></i>
+        <span>Categories</span>
+    </NavLink> */}
+    <NavLink to="#" >
+        <i className="bi bi-box-arrow-right"></i>
+        <span>Logout</span>
+    </NavLink>
+</div>
    
     <div className="main-content">
       

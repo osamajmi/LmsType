@@ -89,7 +89,7 @@ export const Admin = () => {
           
             <span>Admin</span>
             <span className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="fas fa-chevron-down"></i>
+                
             </span>
             <div className="dropdown-menu">
                 <Link>Settings</Link>

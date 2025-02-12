@@ -124,7 +124,7 @@ const Categories = () => {
                                 <tr key={item.cat_id}>
                                     <td>{index+1}</td>
                                     <td>{item.name}</td>
-                                    <td><span className='bi bi-trash btn-danger' onClick={()=>handelDelete(item.cat_id)}></span></td>
+                                    <td><button className='btn btn-danger btn-sm bi bi-trash ' onClick={()=>handelDelete(item.cat_id)}></button></td>
                                 </tr>
                             )
 

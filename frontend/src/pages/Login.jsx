@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import {useFormik} from 'formik';
 import  * as yup from 'yup';
 import axios from 'axios';
@@ -46,16 +46,32 @@ const Login = () => {
         }
 
     })
+    const linStyle = {
+        textDecoration: "none",
+        color: "#6a0dad",
+        fontSize:'18px'
+
+    }
     
     return (
     <div className="authincation ">
         <div className="container-fluid ">
             <div className="row justify-content-center h-100 align-items-center">
                 <div className="col-md-6">
+                <NavLink to="/" style={linStyle}>
+                               <span className='bi bi-chevron-left fs-4'>
+                                  
+                               </span>
+                               <span className='fs-5'> Go to Home Page</span>
+                             
+                        </NavLink>
                     <div className="authincation-content">
+                       
                         <div className="row no-gutters">
                             <div className="col-xl-12">
+                          
                                 <div className="auth-form">
+                               
                                     <h4 className="text-center mb-4">Sign in your account</h4>
                                     <form onSubmit={formik.handleSubmit}>
                                         <div className="form-group mb-3">

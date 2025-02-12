@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
@@ -107,16 +107,35 @@ function validateUserID(e){
         const file = event.target.files[0]; 
         formik.setFieldValue("file", file);  
     };
+    const linStyle = {
+        textDecoration: "none",
+        color: "#6a0dad",
+        fontSize:'18px'
+
+    }
+    
     return (
         <div className="authincation ">
         <div className="container-fluid">
+       
             <div className="row justify-content-center h-100 align-items-center">
+            
                 <div className="col-md-6">
                     <div className="authincation-content">
                         <div className="row no-gutters">
                             <div className="col-xl-12">
                                 <div className="auth-form">
+                                 <div className='d-flex justify-content-between'>
+                                   <NavLink to="/" style={linStyle}>
+                                            <span className='bi bi-chevron-left fs-6'>
+                                                
+                                            </span>
+                                            <span className='fs-6'> Go to Home Page</span>
+                             
+                                       </NavLink>
                                     <h4 className="text-center mb-4">Sign up your account</h4>
+                                    <span></span>
+                                 </div>
                                     <form onSubmit={formik.handleSubmit}>
                                        
                                         <div className="form-group mb-3">

@@ -83,7 +83,7 @@ const Home = () => {
        
         <div className="card">
             <div className="card-header">
-                Recent Activity
+                Students
             </div>
             <div className="card-body">
                 <table>

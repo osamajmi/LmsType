@@ -113,6 +113,7 @@ const Categories = () => {
                 <table className="table table-striped table-hover" style={{"height":'200px', "overflowY":'scroll'}}>
                 <thead>
                         <tr>
+                            <th>Srno</th>
                             <th>Categories_id</th>
                             <th>Name</th>
                             <th>Action</th>
@@ -123,6 +124,7 @@ const Categories = () => {
                             categoires.map((item,index)=>
                                 <tr key={item.cat_id}>
                                     <td>{index+1}</td>
+                                    <td>{item.cat_id}</td>
                                     <td>{item.name}</td>
                                     <td><button className='btn btn-danger btn-sm bi bi-trash ' onClick={()=>handelDelete(item.cat_id)}> Delete</button></td>
                                 </tr>

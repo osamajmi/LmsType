@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { AddVideo } from "../../slicers/video-slicer";
 
 const VideoPanel = () => {
   const [videos, setVideos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const dispacher = useDispatch();
 
   useEffect(() => {
     axios
@@ -35,6 +39,10 @@ const VideoPanel = () => {
   const filteredVideos = selectedCategory
     ? videos.filter((video) => String(video.cat_id) === String(selectedCategory))
     : videos;
+
+    function addWatchlater(video){
+      dispacher(AddVideo(video))
+    }
 
   return (
     <div className="container mt-4">
@@ -67,6 +75,8 @@ const VideoPanel = () => {
               </option>
             ))}
           </select>
+          <h4>Watch Later </h4>
+           <div>{dispacher}</div>
 
           <div className="video-container">
             {selectedVideo && (
@@ -85,6 +95,8 @@ const VideoPanel = () => {
               </div>
             )}
           </div>
+
+          
         </div>
 
         <div className="col-md-8">
@@ -102,7 +114,10 @@ const VideoPanel = () => {
                       borderRadius: "10px",
                     }}
                   />
-                  <p className="text-center mt-2">{video.title}</p>
+                  <div className="d-flex justify-content-between">
+                      <p className="text-center mt-2">{video.title}</p>
+                      <button className="btn btn-success bi bi-view-list" onClick={addWatchlater}>Watch Later</button>
+                  </div>
                 </div>
               </div>
             ))}
